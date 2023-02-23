@@ -1,3 +1,5 @@
+import jdk.dynalink.NamedOperation;
+
 import java.util.Scanner;
 
 public class ATM {
@@ -18,8 +20,9 @@ public class ATM {
                 System.out.println("Welcome " + customer.getName() + "!\n");
                 System.out.println("Would you like to:\n");
                 System.out.println("1. Withdraw \n");
-                System.out.println("2. Interrogate sold\n");
-                System.out.println("3. Leave\n");
+                System.out.println("2. Deposit \n");
+                System.out.println("3. Interrogate sold\n");
+                System.out.println("4. Leave\n");
 
                 int choice = scanner.nextInt();
                 if (choice == 1) {
@@ -86,7 +89,29 @@ public class ATM {
                         }
                     }
 
-                } else if (choice == 2) {
+                }
+                else if (choice == 2){
+                    System.out.println("Please insert the amount you want to deposit :");
+                    int ammount1 = scanner.nextInt();
+                    if (ammount1 <= 0) {
+                        System.out.println("Invalid amount. Please enter a positive value.");
+                        return;}
+                        long money = customer.getMoney();
+                        money += ammount1;
+                        customer.setMoney(money);
+                    System.out.println();
+                    System.out.println("1. Continue");
+                    System.out.println("2. Leave");
+                    int choiceInterrogation = scanner.nextInt();
+                    if (choiceInterrogation == 1) {
+                        continue;
+                    } else if (choiceInterrogation == 2) {
+                        break;
+                    } else {
+                        System.out.println("Try again champ.");
+                    }
+                    }
+                    else if (choice == 3) {
                     System.out.println(customer.getMoney() + customer.getCurrency().toString() + "\n");
                     System.out.println("1. Continue");
                     System.out.println("2. Leave");
@@ -100,7 +125,7 @@ public class ATM {
                         System.out.println("Try again champ.");
                     }
 
-                } else if (choice == 3) {
+                } else if (choice == 4) {
                     return;
                 }
             }
